@@ -92,6 +92,8 @@ class TwilioHelper
                 $this->twilio->createText($this->number, $reply_to, $transcript->getTranscriptionText())->send();
             else
                 $this->twilio->createText($this->number, $reply_to, 'We were unable to transcribe your message. Sorry.')->send();
+
+            $this->twilio->deleteRecording($transcript->getRecordingSid());
         }
 
         $twml = new Majax_Twilio_Twiml();
